@@ -9,5 +9,7 @@ import java.util.List;
 public interface FormManagementService {
     void submitForm(FormApplication requestForm); // Rabbit values
 
-    List<FormApplication> getFormStatus(UserDetail userDetail);
+    List<FormApplication> getSubmittedForms(UserDetail userDetail);
+
+    FormApplication getSubmittedFormStatus(Long applicationID);
 }
