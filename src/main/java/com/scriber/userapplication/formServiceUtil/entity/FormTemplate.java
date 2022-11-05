@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class DocumentTemplate {
-    private String documentName;
+public class FormTemplate {
+    private String formName;
     private List<Field> fields;
 }

@@ -4,7 +4,7 @@ import com.scriber.userapplication.dto.DocumentDetail;
 import com.scriber.userapplication.dto.UserDetailDTO;
 import com.scriber.userapplication.entity.Document;
 import com.scriber.userapplication.entity.UserDetail;
-import com.scriber.userapplication.formServiceUtil.entity.DocumentTemplate;
+import com.scriber.userapplication.formServiceUtil.entity.FormTemplate;
 import com.scriber.userapplication.service.DashboardService;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public List<DocumentTemplate> getSupportedDocuments() {
+    public List<FormTemplate> getSupportedDocuments() {
         return null;
     }
 

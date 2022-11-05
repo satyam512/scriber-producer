@@ -4,7 +4,7 @@ import com.scriber.userapplication.dto.DocumentDetail;
 import com.scriber.userapplication.dto.UserDetailDTO;
 import com.scriber.userapplication.entity.Document;
 import com.scriber.userapplication.entity.UserDetail;
-import com.scriber.userapplication.formServiceUtil.entity.DocumentTemplate;
+import com.scriber.userapplication.formServiceUtil.entity.FormTemplate;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface DashboardService {
 
     boolean updateDocument(DocumentDetail documentDetail, UserDetail userDetail);
 
-    List<DocumentTemplate> getSupportedDocuments();
+    List<FormTemplate> getSupportedDocuments();
 
     List<String> getDocumentTypes();
 }
