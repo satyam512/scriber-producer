@@ -69,7 +69,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public List<Document> getDocuments(UserDetail userDetail) {
-        List<Document> documents = documentRepository.findAllByUserDetails(userDetail);
+        List<Document> documents = documentRepository.findAllByUserDetail(userDetail);
         return documents;
     }
 

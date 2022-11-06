@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface DocumentRepository extends JpaRepository<Document, Long> {
-    List<Document> findAllByUserDetails(UserDetail userDetail);
+    List<Document> findAllByUserDetail(UserDetail userDetail);
 }
