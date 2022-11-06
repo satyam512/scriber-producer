@@ -42,7 +42,7 @@ deactivate userApp
 
 user -> userApp : submit a filled form
 userApp -> rabbit : push a filled form
-rabbit -> formApp : pulls a message queue
+rabbit -> formApp : push a message queue
 formApp -> exAuth : sends a form
 exAuth -> formApp : send form status/errors
 formApp -> formDB : logs form results
