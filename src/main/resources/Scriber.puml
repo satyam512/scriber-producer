@@ -1,11 +1,70 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 autonumber
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor  Actor as user
+participant Scriber_User_App as userApp
+participant Scriber_Verification_App as mlApp
+database    User_DB  as userDB
+queue       RabbitMQ as rabbit
+participant Scriber_Form_App as formApp
+database    Form_DB  as formDB
+participant External_Form_Authority as exAuth
+user -> userApp : Login/Sign-Up
+activate userApp
+userApp -> userDB : fetch/save basic profile
+userApp -> user : profile JWT
+deactivate userApp
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+
+user -> userApp : showSupportedForms
+activate userApp
+userApp -> formApp : getSupportedFormName
+activate formApp
+formApp -> formDB : get supported forms
+formDB -> formApp : supported forms
+formApp -> userApp : supportedFormMetaData \n <supportedForms>
+deactivate formApp
+userApp -> user : \nbased on user profile \n <supportedSelectedForms>
+deactivate userApp
+
+user -> userApp : fill-a-form
+activate userApp
+userApp -> formApp : fetch form template
+activate formApp
+formApp -> formDB : fetch form template
+formDB -> formApp : <formTemplate>
+formApp -> userApp : <formTemplate>
+deactivate formApp
+userApp -> userDB : getUserDocuments - to support Auto-Fill
+userDB -> userApp : userDocuments if present
+userApp -> user : Auto-filled form Template \n <AutoFilledFormTemplate>
+deactivate userApp
+
+user -> userApp : submit a filled form
+userApp -> rabbit : push a filled form
+rabbit -> formApp : pulls a message queue
+formApp -> exAuth : sends a form
+exAuth -> formApp : send form status/errors
+formApp -> formDB : logs form results
+
+user -> userApp : get submitted form status
+activate userApp
+userApp -> formApp : get user's submitted form status
+formApp -> formDB : get submitted form(s)
+formDB -> formApp : submitted form status
+formApp -> userApp : submitted form status
+userApp -> user : form status
+deactivate userApp
+
+
+
+
+
+'Foo -> Foo1 : To actor
+'Foo -> Foo2 : To boundary
+'Foo -> Foo3 : To control
+'Foo -> Foo4 : To entity
+'Foo -> Foo5 : To database
+'Foo -> Foo6 : To collections
+'Foo -> Foo7: To queue
 @enduml
